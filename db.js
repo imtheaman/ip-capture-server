@@ -26,7 +26,7 @@ const insertDoc = async (doc) => {
 
 const readDoc = async () => {
   if (!dbData) await connection();
-  const doc = await dbData.find({});
+  const doc = await dbData.find({}, {ip: 1});
   return doc;
 };
 
